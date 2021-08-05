@@ -22,6 +22,10 @@ result after configuration:
 ![AWS instances](./assets/autoconf_instance.png)
 **Notice:** on instance https not configured thats why you must use http only
 
+**BASH script**
+autoconfigure BASH script is inside of ***bash01.txt*** file
+```$sh bash01.sh```
+
 ### **Step 4**
 CentOS instance this instance is checks ping to other instances
 1. Ping to manually configured instance
