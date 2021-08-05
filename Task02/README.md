@@ -4,7 +4,7 @@ In this template you can see Exadel intership task 2 solution
 ### **Step 1**
 Created 3 instances in AWS
 
-![AWS instances](/assets/instances.png)
+![AWS instances](./assets/instances.png)
 
 1. Manually configured server (Ubuntu) 
 2. Autoconfigured instance (Ubuntu)
