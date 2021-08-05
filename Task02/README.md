@@ -27,7 +27,8 @@ result after configuration:
 **Notice:** on instance https not configured thats why you must use http only
 
 **BASH script**
-autoconfigure BASH script is inside of ***bash01.txt*** file
+
+Autoconfigure BASH script is inside of ***bash01.txt*** file
 
 ```$sh bash01.sh```
 
