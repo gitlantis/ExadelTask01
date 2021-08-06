@@ -11,7 +11,7 @@ Created 3 instances in AWS
 3. To check ping between instances (CentOS)
 
 ### **Step 2**
-Manually configured instance (http://3.69.49.61)
+Manually configured instance (http://18.156.197.153)
 result after configuration:
 
 ![AWS instances](./assets/manual_instance.png)
@@ -19,7 +19,7 @@ result after configuration:
 **Notice:** on instance https not configured thats why you must use http only
 
 ### **Step 3**
-Autoconfigured instance (http://18.196.41.225)
+Autoconfigured instance (http://3.69.53.105)
 result after configuration:
 
 ![AWS instances](./assets/autoconf_instance.png)
@@ -30,7 +30,7 @@ result after configuration:
 
 Autoconfigure BASH script is inside of ***bash01.txt*** file
 
-```$sh bash01.sh```
+```sh bash01.sh```
 
 ### **Step 4**
 CentOS instance this instance is checks ping to other instances
@@ -45,3 +45,9 @@ CentOS instance this instance is checks ping to other instances
 3. Ping from autoconfigured instance to centos
 
 ![AWS instances](./assets/autoconf_to_centos.png)
+
+4. ```curl``` from centOS instance
+
+```curl http://18.156.197.153:80```
+
+![AWS instances](./assets/curl_to_from_instance.png)
