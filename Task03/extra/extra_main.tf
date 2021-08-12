@@ -10,8 +10,8 @@ terraform {
 }
 
 data "aws_ami" "latest-ubuntu" {
+   owners      = ["self", "aws-marketplace"]
   most_recent = true
-  owners      = ["099720109477"] 
 
   filter {
     name   = "name"
@@ -25,7 +25,7 @@ data "aws_ami" "latest-ubuntu" {
 }
 
 data "aws_ami" "latest-centos" {
-  owners      = ["679593333241"]
+  owners      = ["self", "aws-marketplace"]
   most_recent = true
 
   filter {
@@ -48,8 +48,8 @@ data "aws_ami" "latest-centos" {
 provider "aws" {
   profile    = "default"
   region     = "eu-central-1"
-  access_key = "AKIATVMKYGXW6TSEPJWN"
-  secret_key = "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"
+  access_key = "********"
+  secret_key = "************************"
 }
 
 #Instance Ubuntu
@@ -60,7 +60,7 @@ resource "aws_instance" "extra_app_server" {
 
   provisioner "file" {
     source      = "ASPem01.pem"
-    destination = "/tmp/ASPem01.pem"
+    destination = "~/tmp/ASPem01.pem"
 
     connection {
       type        = "ssh"
@@ -83,23 +83,6 @@ resource "aws_instance" "extra_test_server" {
   ami           = "${data.aws_ami.latest-centos.id}"
   instance_type = "t2.micro"
   key_name      = "ASPair01"
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt install nginx -y",
-      "sudo chown -R ubuntu:ubuntu /var/www",
-      "echo Hello World > /var/www/html/index.html",
-      "lsb_release -a >> /var/www/html/index.html",      
-    ]
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("./ASPair01.pem")
-      host        = aws_instance.extra_app_server.public_ip
-    }
-  }
 
   tags = {
     Name = "CentOS"
