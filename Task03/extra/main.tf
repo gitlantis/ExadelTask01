@@ -10,7 +10,7 @@ terraform {
 }
 
 data "aws_ami" "latest-ubuntu" {
-   owners      = ["self", "aws-marketplace"]
+  owners      = ["self", "aws-marketplace"]
   most_recent = true
 
   filter {
@@ -48,27 +48,15 @@ data "aws_ami" "latest-centos" {
 provider "aws" {
   profile    = "default"
   region     = "eu-central-1"
-  access_key = "********"
-  secret_key = "************************"
+  access_key = "-"
+  secret_key = "-"
 }
 
 #Instance Ubuntu
 resource "aws_instance" "extra_app_server" {
-  ami           = "${data.aws_ami.latest-ubuntu.id}"
+  ami           = data.aws_ami.latest-ubuntu.id
   instance_type = "t2.micro"
   key_name      = "ASPair01"
-
-  provisioner "file" {
-    source      = "ASPem01.pem"
-    destination = "~/tmp/ASPem01.pem"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("./ASPair01.pem")
-      host        = aws_instance.extra_app_server.public_ip
-    }
-  }
 
   tags = {
     Name = "Ubuntu"
@@ -80,10 +68,10 @@ resource "aws_instance" "extra_app_server" {
 
 #instance CentOS
 resource "aws_instance" "extra_test_server" {
-  ami           = "${data.aws_ami.latest-centos.id}"
+  ami           = data.aws_ami.latest-centos.id
   instance_type = "t2.micro"
-  key_name      = "ASPair01"
-
+  key_name      = "ASPair01"  
+ 
   tags = {
     Name = "CentOS"
   }
@@ -242,5 +230,3 @@ resource "aws_security_group_rule" "centos_out_icmp" {
   cidr_blocks       = ["172.31.0.0/16"]
   security_group_id = aws_security_group.extra_allow_centos.id
 }
-
-#"${aws_eip.app_server.public_ip}/32"
