@@ -9,6 +9,42 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+data "aws_ami" "latest-ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] 
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+data "aws_ami" "latest-centos" {
+  owners      = ["679593333241"]
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["CentOS Linux 7 x86_64 HVM EBS *"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
+
 provider "aws" {
   profile    = "default"
   region     = "eu-central-1"
@@ -17,66 +53,79 @@ provider "aws" {
 }
 
 #Instance Ubuntu
-resource "aws_instance" "app_server" {
-  ami           = "ami-05e1e66d082e56118"
+resource "aws_instance" "extra_app_server" {
+  ami           = "${data.aws_ami.latest-ubuntu.id}"
   instance_type = "t2.micro"
   key_name      = "ASPair01"
+
+  provisioner "file" {
+    source      = "ASPem01.pem"
+    destination = "/tmp/ASPem01.pem"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("./ASPair01.pem")
+      host        = aws_instance.extra_app_server.public_ip
+    }
+  }
+
+  tags = {
+    Name = "Ubuntu"
+  }
+
+  vpc_security_group_ids = ["${aws_security_group.extra_allow_ubuntu.id}"]
+
+}
+
+#instance CentOS
+resource "aws_instance" "extra_test_server" {
+  ami           = "${data.aws_ami.latest-centos.id}"
+  instance_type = "t2.micro"
+  key_name      = "ASPair01"
+
   provisioner "remote-exec" {
     inline = [
       "sudo apt update",
       "sudo apt install nginx -y",
       "sudo chown -R ubuntu:ubuntu /var/www",
       "echo Hello World > /var/www/html/index.html",
-      "lsb_release -a >> /var/www/html/index.html",
-      "sudo apt install docker.io -y",
+      "lsb_release -a >> /var/www/html/index.html",      
     ]
 
     connection {
       type        = "ssh"
       user        = "ubuntu"
       private_key = file("./ASPair01.pem")
-      host = aws_instance.app_server.public_ip
-    }    
+      host        = aws_instance.extra_app_server.public_ip
+    }
   }
-  tags = {
-    Name = "Ubuntu"
-  }
-
-  vpc_security_group_ids = ["${aws_security_group.allow_ubuntu.id}"]
-
-}
-
-#instance CentOS
-resource "aws_instance" "test_server" {
-  ami           = "ami-073a8e22592a4a925"
-  instance_type = "t2.micro"
-  key_name      = "ASPair01"
 
   tags = {
     Name = "CentOS"
   }
 
-  vpc_security_group_ids = ["${aws_security_group.allow_centos.id}"]
+  vpc_security_group_ids = ["${aws_security_group.extra_allow_centos.id}"]
 
 }
 
 # Security group for Ubuntu
-resource "aws_security_group" "allow_ubuntu" {
-  name        = "allow_ubuntu"
+resource "aws_security_group" "extra_allow_ubuntu" {
+  name        = "extra_allow_ubuntu"
   description = "Ubuntu security group"
 
   tags = {
-    Name = "allow_ubuntu"
+    Name = "extra_allow_ubuntu"
   }
 }
 
 # Security group for CentOS
-resource "aws_security_group" "allow_centos" {
-  name        = "allow_centos"
+resource "aws_security_group" "extra_allow_centos" {
+  name        = "extra_allow_centos"
   description = "CentOS security group"
 
   tags = {
-    Name = "allow_centos"
+    Name = "extra_allow_centos"
   }
 }
 
@@ -88,7 +137,7 @@ resource "aws_security_group_rule" "ubuntu_out_all" {
   protocol          = "all"
   cidr_blocks       = ["0.0.0.0/0"]
   ipv6_cidr_blocks  = ["::/0"]
-  security_group_id = aws_security_group.allow_ubuntu.id
+  security_group_id = aws_security_group.extra_allow_ubuntu.id
 }
 
 # Security Group rule 2: Allow SSH (TCP 22) incoming traffic from anywhere
@@ -98,7 +147,7 @@ resource "aws_security_group_rule" "ubuntu_in_ssh" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_ubuntu.id
+  security_group_id = aws_security_group.extra_allow_ubuntu.id
 }
 
 # Security Group rule 3: Allow HTTP (TCP 80) incoming traffic from anywhere
@@ -108,7 +157,7 @@ resource "aws_security_group_rule" "ubuntu_in_http" {
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_ubuntu.id
+  security_group_id = aws_security_group.extra_allow_ubuntu.id
 }
 
 # Security Group rule 4: Allow HTTPS (TCP 443) incoming traffic from anywhere
@@ -118,7 +167,7 @@ resource "aws_security_group_rule" "ubuntu_in_https" {
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_ubuntu.id
+  security_group_id = aws_security_group.extra_allow_ubuntu.id
 }
 
 # Security Group rule 5: Allow ICMP packages incoming traffic from anywhere
@@ -128,7 +177,7 @@ resource "aws_security_group_rule" "ubuntu_in_icmp" {
   to_port           = -1
   protocol          = "icmp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_ubuntu.id
+  security_group_id = aws_security_group.extra_allow_ubuntu.id
 }
 
 # Security Group rule 1: Allow SSH (TCP 22) incoming traffic from anywhere
@@ -138,7 +187,7 @@ resource "aws_security_group_rule" "centos_in_ssh" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 #Security Group rule 2: Allow HTTP (TCP 80) incoming traffic from anywhere
@@ -148,7 +197,7 @@ resource "aws_security_group_rule" "centos_in_http" {
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 # Security Group rule 3: Allow HTTPS (TCP 443) incoming traffic from anywhere
@@ -158,7 +207,7 @@ resource "aws_security_group_rule" "centos_in_https" {
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 # Security Group rule 4: Allow ICMP packages incoming traffic from anywhere
@@ -168,7 +217,7 @@ resource "aws_security_group_rule" "centos_in_icmp" {
   to_port           = -1
   protocol          = "icmp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 # Security Group rule 1: Allow SSH (TCP 22) outgoing traffic from anywhere
@@ -178,7 +227,7 @@ resource "aws_security_group_rule" "centos_out_ssh" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 # Security Group rule 2: Allow HTTP (TCP 80) outgoing traffic from anywhere
@@ -188,7 +237,7 @@ resource "aws_security_group_rule" "centos_out_http" {
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 # Security Group rule 3: Allow HTTPS (TCP 443) outgoing traffic from anywhere
@@ -198,7 +247,7 @@ resource "aws_security_group_rule" "centos_out_https" {
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 # Security Group rule 4: Allow ICMP packages outgoing traffic from anywhere
@@ -208,7 +257,7 @@ resource "aws_security_group_rule" "centos_out_icmp" {
   to_port           = -1
   protocol          = "icmp"
   cidr_blocks       = ["172.31.0.0/16"]
-  security_group_id = aws_security_group.allow_centos.id
+  security_group_id = aws_security_group.extra_allow_centos.id
 }
 
 #"${aws_eip.app_server.public_ip}/32"
