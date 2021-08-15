@@ -1,0 +1,33 @@
+version: "3.9"  
+
+services:
+  web:
+    build: ../extra3.2.1/hello-world-html          
+    ports:
+      - 8080:80
+    restart: on-failure
+    deploy:
+      mode: replicated
+      replicas: 5
+    env_file: 
+      - web.env
+        
+  app: 
+    image: jetty:latest
+    ports:
+      - 8081:8080
+    volumes:
+      - /path/to/my/webapps:/var/lib/jetty/webapps
+    env_file: 
+      - app.env
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes: 
+      - /my/own/datadir:/var/lib/mysql
+    env_file: 
+      - db.env

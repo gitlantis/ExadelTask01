@@ -6,17 +6,7 @@ for this solution used Ubuntu 20.04 LTS AWS instance
 #### 1. Started Ubuntu 20.04 intance on AWS
  
 in the task it is required to use VM for this task, 
-installing tightvnc and ubuntu-desctop to connect docker interface
-
-link to [desktop configuration on aws](https://ubuntu.com/tutorials/ubuntu-desktop-aws#1-overview).
-
- ```sh
- sudo apt update
- sudo apt install ubuntu-desktop
- sudo apt install tightvncserver
- sudo apt install gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
- ```
-for manual installation you can use following lint:
+to install docker manually you can use following link:
 
 [manual installation](https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04)
 
@@ -110,7 +100,7 @@ to print new environment variablevariable on a web page  run this command:
 
 #### 4. Docker image created with name ```html-server-image:v1``` push name will be ```html-intern-image:v1```
 
-![docker repo](./Extra4.1/assets/docker_repo.png)
+![docker repo](./extra4.1/assets/docker_repo.png)
 
 commands to push repository
 ```sh
@@ -118,18 +108,35 @@ docker tag html-server-image:v1 gitlantis/html-intern-image:v1
 docker push gitlantis/html-intern-image:v1
  ```
 
- ![after push](./Extra4.1/assets/after_push.png)
+ ![after push](./extra4.1/assets/after_push.png)
 
 ##### Extra 4.1
 
 created workflow to build and push image to docker hub
 
-![workflow run](./Extra4.1/assets/workflow_run.png)
+![workflow run](./extra4.1/assets/workflow_run.png)
 
 process completed successfully
 
 ```yaml``` configuration file is inside of ```.github/workflows/main.yaml```
 
-### 5
+### 5 ```docker-compose.yaml``` composes three images
+
+1. ```web``` ```html-server-image``` builds from last example
+2. ```app``` [Jetty](https://hub.docker.com/_/jetty) Java app it requires installing mysql 
+3. ```db``` [MySQL](https://hub.docker.com/_/mysql) MySql image 
+
+to compose and run after completion task:
+
+```docker-compose up --detach```
 
 #### Extra 5.1 
+```./extra5.1/``` contains 4 files
+- ```docker-compose.yaml``` docker compose file  
+- ```web.env``` environment variables for web container
+- ```app.env``` environment variables for app container
+- ```db.env``` environment variables for db container
+
+```docker-compose up --detach```
+
+Success

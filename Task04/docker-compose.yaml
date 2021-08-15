@@ -1,0 +1,35 @@
+version: "3.9"  
+
+services:
+  web:
+    build: ./extra3.2.1/hello-world-html          
+    ports:
+      - 8080:80
+    restart: on-failure
+    deploy:
+      mode: replicated
+      replicas: 5
+    environment: 
+      DEVOPS: TestUser01
+        
+  app: 
+    image: jetty:latest
+    ports:
+      - 8081:8080
+    volumes:
+      - /path/to/my/webapps:/var/lib/jetty/webapps
+    environment: 
+      JETTY_HOME: /usr/local/jetty
+      JETTY_BASE: /var/lib/jetty
+      TMPDIR: /tmp/jetty    
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes: 
+      - /my/own/datadir:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: TestSQL

@@ -1,7 +1,5 @@
-FROM nginx:latest
+FROM nginx:alpine
 
-RUN apt update
-RUN apt install -y curl
 ENV DEVOPS="gitlantis"
 
 COPY ./*.html /usr/share/nginx/html
