@@ -122,6 +122,7 @@ docker push gitlantis/html-intern-image:v1
 
 ##### Extra 4.1
 
+created workflow to build and push image to docker hub
 
 
 ### 5
