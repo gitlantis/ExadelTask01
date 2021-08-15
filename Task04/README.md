@@ -124,6 +124,11 @@ docker push gitlantis/html-intern-image:v1
 
 created workflow to build and push image to docker hub
 
+![workflow run](./Extra4.1/assets/workflow_run.png)
+
+process completed successfully
+
+```yaml``` configuration file is inside of ```.github/workflows/main.yaml```
 
 ### 5
 
