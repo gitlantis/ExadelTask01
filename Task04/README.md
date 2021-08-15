@@ -130,7 +130,7 @@ to compose and run after completion task:
 
 ```docker-compose up --detach```
 
-#### Extra 5.1 
+#### Extra 5.1  
 ```./extra5.1/``` contains 4 files
 - ```docker-compose.yaml``` docker compose file  
 - ```web.env``` environment variables for web container
