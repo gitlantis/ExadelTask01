@@ -1,0 +1,129 @@
+# Docker task (Task04)
+
+Docker image example experience task.
+for this solution used Ubuntu 20.04 LTS AWS instance
+
+#### 1. Started Ubuntu 20.04 intance on AWS
+ 
+in the task it is required to use VM for this task, 
+installing tightvnc and ubuntu-desctop to connect docker interface
+
+link to [desktop configuration on aws](https://ubuntu.com/tutorials/ubuntu-desktop-aws#1-overview).
+
+ ```sh
+ sudo apt update
+ sudo apt install ubuntu-desktop
+ sudo apt install tightvncserver
+ sudo apt install gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+ ```
+for manual installation you can use following lint:
+
+[manual installation](https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04)
+
+Update the local database with the command:
+
+```sudo apt-get update```
+
+Download Dependencies
+
+```sudo apt-get install apt-transport-https ca-certificates curl software-properties-common```
+
+Add Docker’s GPG Key
+
+```curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add –```
+
+Install the Docker Repository
+
+```sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable" ```
+
+
+Update the repositories you just added:
+
+```sudo apt-get update```
+
+Install Latest Version of Docker
+
+```sudo apt-get install docker-ce```
+
+open access to current user to execute docker command
+
+```sudo chmod 666 /var/run/docker.sock```
+
+##### **Extra 1.1**
+
+auto instal bash scrip is inside of ```extra1.1/docker-install.sh``` file
+
+```sh docker-install.sh```
+
+#### 2. pulling contaier and running it
+
+I am going to pull hello-world container to test it.
+
+```docker run hello-world```
+
+[https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world)
+
+if this container is not exist it pulls automatically from docker hub
+
+##### **Extra 2.1**
+
+inside of ```extra1.1``` folder you can see folder ```hello-world-html```
+this folder contains nginx configuration ```index.html``` cources to copy container.
+
+building container
+```docker build . -t html-server-image:v1```
+
+running it on local port ```8080```
+```docker run -it -d -p 8080:80 html-server-image:v1```
+
+![result](./extra2.1/assets/result.png)
+
+![result](./extra2.1/assets/full_result.png)
+
+killing all containers
+
+```docker kill $(docker ps -q)```
+
+to remove all images
+
+```docker rmi -f $(docker images -a -q)```
+
+#### 3.1 executed in extra 2.1 
+required solution executed in extra 2.1 that I created own docker image
+
+##### Extra 3.1.1
+container contains Alphine OS with nginx installed
+
+#### 3.2 Environment variable added by docker command
+
+build nginx container 
+
+added ```DEVOPS``` variable into ```Dockerfile```
+
+```ENV DEVOPS="gitlantis"```
+
+##### Extra 3.2.1
+
+to print new environment variablevariable on a web page  run this command:
+
+```docker run -e DEVOPS="User2" -it -d -p 8086:80 html-server-image:v1```
+
+#### 4. Docker image created with name ```html-server-image:v1``` push name will be ```html-intern-image:v1```
+
+![docker repo](./Extra4.1/assets/docker_repo.png)
+
+commands to push repository
+```sh
+docker tag html-server-image:v1 gitlantis/html-intern-image:v1
+docker push gitlantis/html-intern-image:v1
+ ```
+
+ ![after push](./Extra4.1/assets/after_push.png)
+
+##### Extra 4.1
+
+
+
+### 5
+
+#### Extra 5.1 
