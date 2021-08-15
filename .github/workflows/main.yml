@@ -2,15 +2,15 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
 
   build:
 
-    runs-on: nginx-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build ./Task04/Extra3.2.1/hello-world-html -t html-server-image:v1
+      run: docker build ./Task04/extra3.2.1/hello-world-html -t html-server-image:v1
     - name: Docker push
       run: |
         docker tag html-server-image:v1 gitlantis/html-intern-image:v1
