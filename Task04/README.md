@@ -3,7 +3,7 @@
 Docker image example experience task.
 for this solution used Ubuntu 20.04 LTS AWS instance
 
-#### 1. Started Ubuntu 20.04 intance on AWS
+### 1. Started Ubuntu 20.04 intance on AWS
  
 in the task it is required to use VM for this task, 
 to install docker manually you can use following link:
@@ -39,13 +39,13 @@ open access to current user to execute docker command
 
 ```sudo chmod 666 /var/run/docker.sock```
 
-##### **Extra 1.1**
+#### **Extra 1.1**
 
 auto instal bash scrip is inside of ```extra1.1/docker-install.sh``` file
 
 ```sh docker-install.sh```
 
-#### 2. pulling contaier and running it
+### 2. pulling contaier and running it
 
 I am going to pull hello-world container to test it.
 
@@ -55,7 +55,7 @@ I am going to pull hello-world container to test it.
 
 if this container is not exist it pulls automatically from docker hub
 
-##### **Extra 2.1**
+#### **Extra 2.1**
 
 inside of ```extra1.1``` folder you can see folder ```hello-world-html```
 this folder contains nginx configuration ```index.html``` cources to copy container.
@@ -78,13 +78,13 @@ to remove all images
 
 ```docker rmi -f $(docker images -a -q)```
 
-#### 3.1 executed in extra 2.1 
+### 3.1 executed in extra 2.1 
 required solution executed in extra 2.1 that I created own docker image
 
-##### Extra 3.1.1
+#### Extra 3.1.1
 container contains Alphine OS with nginx installed
 
-#### 3.2 Environment variable added by docker command
+### 3.2 Environment variable added by docker command
 
 build nginx container 
 
@@ -92,13 +92,13 @@ added ```DEVOPS``` variable into ```Dockerfile```
 
 ```ENV DEVOPS="gitlantis"```
 
-##### Extra 3.2.1
+#### Extra 3.2.1
 
 to print new environment variablevariable on a web page  run this command:
 
 ```docker run -e DEVOPS="User2" -it -d -p 8086:80 html-server-image:v1```
 
-#### 4. Docker image created with name ```html-server-image:v1``` push name will be ```html-intern-image:v1```
+### 4. Docker image created with name ```html-server-image:v1``` push name will be ```html-intern-image:v1```
 
 ![docker repo](./extra4.1/assets/docker_repo.png)
 
@@ -110,7 +110,7 @@ docker push gitlantis/html-intern-image:v1
 
  ![after push](./extra4.1/assets/after_push.png)
 
-##### Extra 4.1
+#### Extra 4.1
 
 created workflow to build and push image to docker hub
 
