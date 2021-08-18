@@ -3,106 +3,112 @@
   become: yes
   remote_user: centos
   hosts: all
-  environment:
-    PATH: /usr/local/bin/
 
   tasks:
-    # - name: Install yum utils
-    #   yum:
-    #     name: yum-utils
-    #     state: latest
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
 
-    # - name: Install device-mapper-persistent-data
-    #   yum:
-    #     name: device-mapper-persistent-data
-    #     state: latest
+    - name: Install device-mapper-persistent-data
+      yum:
+        name: device-mapper-persistent-data
+        state: latest
 
-    # - name: Install lvm2
-    #   yum:
-    #     name: lvm2
-    #     state: latest
+    - name: Install lvm2
+      yum:
+        name: lvm2
+        state: latest
 
-    # - name: Add Docker repo
-    #   get_url:
-    #     url: https://download.docker.com/linux/centos/docker-ce.repo
-    #     dest: /etc/yum.repos.d/docer-ce.repo
-    #   become: yes
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docer-ce.repo
+      become: yes
 
-    # - name: Enable Docker Edge repo
-    #   ini_file:
-    #     dest: /etc/yum.repos.d/docer-ce.repo
-    #     section: 'docker-ce-edge'
-    #     option: enabled
-    #     value: 0
-    #   become: yes
+    - name: Enable Docker Edge repo
+      ini_file:
+        dest: /etc/yum.repos.d/docer-ce.repo
+        section: 'docker-ce-edge'
+        option: enabled
+        value: 0
+      become: yes
 
-    # - name: Enable Docker Test repo
-    #   ini_file:
-    #     dest: /etc/yum.repos.d/docer-ce.repo
-    #     section: 'docker-ce-test'
-    #     option: enabled
-    #     value: 0
-    #   become: yes
+    - name: Enable Docker Test repo
+      ini_file:
+        dest: /etc/yum.repos.d/docer-ce.repo
+        section: 'docker-ce-test'
+        option: enabled
+        value: 0
+      become: yes
 
-    # - name: Install Docker
-    #   package:
-    #     name: docker-ce
-    #     state: latest
-    #   become: yes
+    - name: Install Docker
+      package:
+        name: docker-ce
+        state: latest
+      become: yes
 
-    # - name: Start Docker service
-    #   service:
-    #     name: docker
-    #     state: started
-    #     enabled: yes
-    #   become: yes
-
-    # - name: Add user vagrant to docker group
-    #   user:
-    #     name: vagrant
-    #     groups: docker
-    #     append: yes
-    #   become: yes
-
-    # - name: Install python
-    #   yum: 
-    #     name: "python3"
-    #     state: latest
-
-    # - name: Install pip download    
-    #   get_url:
-    #     url: https://bootstrap.pypa.io/get-pip.py
-    #     dest: ./get-pip.py
-    #   become: yes
-    
-    # - name: Install pip install
-    #   shell: "python3 ./get-pip.py"        
-    #   become: yes
-
-    - name: Install pip install
-      shell: "pip install docker-py"        
-
-    # - name: Echo my_env_var
-    #   shell: "echo $MY_ENV_VARIABLE"
-    #   environment:
-    #     MY_ENV_VARIABLE: whatever_value
-
-    # - name: Echo my_env_var again
-    #   shell: "echo $MY_ENV_VARIABLE"
-
-    # - name: Install docker-py 
-    #   pip:
-    #     name:
-    #       - "{{item.name}}"        
-    #   with_items:      
-    #     - { name: docker-py}    
-
-    - name: Install Wordpress
-      docker_container: 
-        name: test-wordpress
-        image: wordpress
+    - name: Start Docker service
+      service:
+        name: docker
         state: started
-        volumes: 
-          - wordpress:/var/www/html
-        ports: 
-          - "8080:80"
+        enabled: yes
+      become: yes
+
+    - name: Add user vagrant to docker group
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
+      become: yes
+
+    - name: Install python
+      yum: 
+        name: "python3"
+        state: latest
+
+    - name: Install pip download    
+      get_url:
+        url: https://bootstrap.pypa.io/get-pip.py
+        dest: ./get-pip.py
+      become: yes
+    
+    - name: Install pip install
+      shell: "python3 ./get-pip.py"        
+      args:
+        executable: /bin/bash
+      become_user: root
+      become: yes
+
+    - name: Install docker-py 
+      shell: "/usr/local/bin/pip install docker-py"
+      become_user: root
+      become: yes      
+      args:
+        executable: /bin/bash      
+
+    - name: Access to docker socks
+      shell: "chmod 666 /var/run/docker.sock"
+      become_user: root
+      become: yes      
+      args:
+        executable: /bin/bash  
+
+    # - name: Kill images
+    #   shell: "docker kill $(docker ps -q)"
+    #   become: yes      
+    #   args:
+    #     executable: /bin/bash  
+
+    # - name: Remove images
+    #   shell: "docker rmi -f $(docker images -a -q)"
+    #   become: yes      
+    #   args:
+    #     executable: /bin/bash  
+                        
+    - name: Install Wordpress
+      shell: "docker run --name some-wordpress -p 8080:80 -d wordpress"
+      become_user: root
+      become: yes      
+      args:
+        executable: /bin/bash      
