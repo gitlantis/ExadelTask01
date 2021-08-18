@@ -1,114 +1,60 @@
 ---
 - name: Install docker
   become: yes
-  remote_user: centos
+  remote_user: ubuntu
   hosts: all
 
-  tasks:
-    - name: Install yum utils
-      yum:
-        name: yum-utils
-        state: latest
+  tasks:    
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
-    - name: Install device-mapper-persistent-data
-      yum:
-        name: device-mapper-persistent-data
-        state: latest
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
 
-    - name: Install lvm2
-      yum:
-        name: lvm2
-        state: latest
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
-    - name: Add Docker repo
-      get_url:
-        url: https://download.docker.com/linux/centos/docker-ce.repo
-        dest: /etc/yum.repos.d/docer-ce.repo
-      become: yes
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
 
-    - name: Enable Docker Edge repo
-      ini_file:
-        dest: /etc/yum.repos.d/docer-ce.repo
-        section: 'docker-ce-edge'
-        option: enabled
-        value: 0
-      become: yes
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
 
-    - name: Enable Docker Test repo
-      ini_file:
-        dest: /etc/yum.repos.d/docer-ce.repo
-        section: 'docker-ce-test'
-        option: enabled
-        value: 0
-      become: yes
-
-    - name: Install Docker
-      package:
-        name: docker-ce
-        state: latest
-      become: yes
-
-    - name: Start Docker service
-      service:
+    - name: Install Docker Module for Python
+      pip:
         name: docker
-        state: started
-        enabled: yes
-      become: yes
 
-    - name: Add user vagrant to docker group
-      user:
-        name: vagrant
-        groups: docker
-        append: yes
-      become: yes
-
-    - name: Install python
-      yum: 
-        name: "python3"
-        state: latest
-
-    - name: Install pip download    
-      get_url:
-        url: https://bootstrap.pypa.io/get-pip.py
-        dest: ./get-pip.py
-      become: yes
-    
-    - name: Install pip install
-      shell: "python3 ./get-pip.py"        
-      args:
-        executable: /bin/bash
-      become_user: root
-      become: yes
-
-    - name: Install docker-py 
-      shell: "/usr/local/bin/pip install docker-py"
-      become_user: root
-      become: yes      
-      args:
-        executable: /bin/bash      
+    - name: Pull default Docker image
+      docker_image:
+        name: "ubuntu"
+        source: pull
 
     - name: Access to docker socks
       shell: "chmod 666 /var/run/docker.sock"
       become_user: root
       become: yes      
       args:
-        executable: /bin/bash  
-
-    # - name: Kill images
-    #   shell: "docker kill $(docker ps -q)"
-    #   become: yes      
-    #   args:
-    #     executable: /bin/bash  
-
-    # - name: Remove images
-    #   shell: "docker rmi -f $(docker images -a -q)"
-    #   become: yes      
-    #   args:
-    #     executable: /bin/bash  
-                        
-    - name: Install Wordpress
-      shell: "docker run --name some-wordpress -p 8080:80 -d wordpress"
-      become_user: root
-      become: yes      
-      args:
         executable: /bin/bash      
+    
+    # - name: Delete docker wordpress
+    #   docker_container:
+    #     name: "wordpress"
+    #     force_kill: true
+    #     keep_volumes: false
+    #     state: absent
+    #   become-user: centos
+    #   become: yes
+
+    - name: Install docker wordpress
+      docker_container:
+        name: wordpress       
+        image: wordpress
+        ports:
+          - 8080:80
+        volumes:
+          - wordpress:/var/www/html

@@ -20,7 +20,12 @@ ansible install script is inside of ```install-docker.yaml```
 
 ## EXTRA 1
 
+for this extra task used ubuntu machines
 
+folder ```extra1``` contains ansible scripit ```install-wpdocker.yaml``` that installs docker in to two instances with wordpress inside of them
 
 ## EXTRA 2
+
+
+
 ## EXTRA 3
