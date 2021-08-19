@@ -42,21 +42,18 @@
         executable: /bin/bash      
 
     - name: Install docker-compose
-      remote_user: ubuntu
-      get_url: 
-        url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
-        dest: /usr/local/bin/docker-compose
-        mode: 'u+x,g+x'
-
+      pip: 
+        name: docker-compose
+        executable: pip3
+      become: yes
+    
     - name: copy Docker Compose files
-      copy:
-        src: ./{{ item }}
-        dest: ./{{ item }}
-      loop:
-        - docker-compose.yml      
+      template:
+          src: docker-compose.yaml
+          dest: /home/ubuntu/docker-compose.yaml    
 
     - name: deploy Docker Compose stack
       docker_compose:
         project_src: ./
         files:
-          - docker-compose.yml       
+          - docker-compose.yaml       
