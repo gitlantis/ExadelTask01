@@ -14,7 +14,7 @@ you must have to install packages into inventory hosts
 
 ansible install script is inside of ```install-docker.yaml```
 
-```sudo ansible-playbook -i hosts -v --private-key ASPair01.pem install-docker.yaml```
+```sudo ansible-playbook -i hosts -v --private-key *****.pem install-docker.yaml```
 
 ![architecture](./assets/docker_install.png)
 
@@ -26,7 +26,7 @@ folder ```extra1``` contains ansible scripit ```install-wpdocker.yaml``` that in
 
 ![architecture](./assets/wp_run.png)
 
-```sudo ansible-playbook -i hosts -v --private-key ASPair01.pem install-docker.yaml```
+```sudo ansible-playbook -i hosts -v --private-key *****.pem install-docker.yaml```
 
 ## EXTRA 2
 
@@ -36,11 +36,11 @@ docker compose have two containers ```wordpress``` and ```mysql```
 
 default passwords are changed for each other.
 
-```sudo ansible-playbook -i hosts -v --private-key ASPair01.pem install-docker.yaml```
+```sudo ansible-playbook -i hosts -v --private-key *****.pem install-docker.yaml```
 
 ## EXTRA 3
 
-for this solution I am going to install playbook from extra 2 task in to all dynamic instances to port 8081 
+for this solution I am going to install playbook from extra 2 task in to all dynamic instances to port 8082 
 
 **1. We must configure dynamic hosts first. 
 
@@ -56,13 +56,11 @@ create configuration file to store role ```/extra3/aws_ec2.yaml```
 - add ```inventory = /external3/aws_ec2``` to ```[defaults]``` section, this will get all hosts if no cutom hosts files are not specified
 
 to test ping to all instances
-```sudo ansible all -m ping -v --private-key ******.pem -u ubuntu```
+```sudo ansible all -m ping -v --private-key ******.pem -u testuser```
 
 ![architecture](./assets/ping_to_all.png)
 
-### **2. install wordpress to instances **
+### **2. install wordpress to all instances**
 
-```sudo ansible-playbook --private-key ASPair01.pem -u ubuntu /extra2/install-docker.yaml```
-
-![architecture](./assets/dynamic_instance.png)
+```sudo ansible-playbook --private-key *****.pem -u testuser /extra2/install-docker.yaml --limit '!own_ip'```
 
