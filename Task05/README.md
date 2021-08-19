@@ -62,5 +62,5 @@ to test ping to all instances
 
 ### **2. install wordpress to all instances**
 
-```sudo ansible-playbook --private-key *****.pem -u testuser /extra2/install-docker.yaml --limit '!own_ip'```
+```sudo ansible-playbook --private-key *****.pem -u testuser /extra2/install-docker.yaml --limit '!public_ipv4_dns'```
 
