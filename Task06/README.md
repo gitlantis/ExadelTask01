@@ -1,31 +1,24 @@
-# Ansible task (Task05)
-Created Ubuntu as a control panel and two instances as worker machine
+# Jenkins task (Task06)
 
-![architecture](./assets/ansible.png)
+following you can see jenkins image running on port ```8080```
 
-ping to hosts using ssh key:
+```docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11```
 
-```sudo ansible all -i hosts -m ping -v --private-key testKey.pem -u centos```
+![jenkins image](./assets/docker_image.png)
+### **Freestyle Job**
 
-![architecture](./assets/ping_result.png)
+created freestyle job echoes ```today is ....``` and prints datetime 
 
-## Installing Docker
-you must have to install packages into inventory hosts
+**configuration:**
 
-ansible install script is inside of ```install-docker.yaml```
+![jenkins image](./assets/build_sh.png)
 
-```sudo ansible-playbook -i hosts -v --private-key ASPair01.pem install-docker.yaml```
+![jenkins image](./assets/freestyle_job.png)
 
-![architecture](./assets/docker_install.png)
+**result:**
 
-## EXTRA 1
-
-for this extra task used ubuntu machines
-
-folder ```extra1``` contains ansible scripit ```install-wpdocker.yaml``` that installs docker in to two instances with wordpress inside of them
-
-## EXTRA 2
+![jenkins image](./assets/result.png)
 
 
+to create docker agents we have to install ```docker pipeline``` plugin
 
-## EXTRA 3
