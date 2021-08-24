@@ -8,12 +8,12 @@ following you can see jenkins image running on port ```8080```
 
 ### **Creating docker agets using docker images**
 to create docker agents we have to install ```docker pipeline``` plugin
-three agens agents creationscript is inide of ```jenkins_agent```
+three agens agents creationscript is inide of ```jenkins_agents```
 1. ```nginx```
 2. ```node```
 3. ```mysql```
 
-after running each agent executes command ```docker ps -a``` command
+after running each agent prints own version 
 
 log file is inside of ```jenkins_agents_log.txt```
 
@@ -31,4 +31,5 @@ created freestyle job echoes ```today is ....``` and prints datetime
 
 ![jenkins image](./assets/result.png)
 
+### ****
 
