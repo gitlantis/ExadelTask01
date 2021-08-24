@@ -24,7 +24,7 @@ pipeline {
         stage('mysql') {
             agent {
                 docker {
-                    image 'mysql:alpine'                    
+                    image 'mysql'                    
                 }
             }
             steps {                
