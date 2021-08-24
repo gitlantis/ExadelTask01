@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {                
-                sh 'docker ps -a'                
+                sh 'sudo docker ps -a'                
             }
         }
         stage('node') {
@@ -18,7 +18,7 @@ pipeline {
                 }
             }
             steps {                
-                sh 'docker ps -a'                
+                sh 'sudo docker ps -a'                
             }
         }
         stage('mysql') {
@@ -28,7 +28,7 @@ pipeline {
                 }
             }
             steps {                
-                sh 'docker ps -a'                
+                sh 'sudo docker ps -a'                
             }
         }
     }
