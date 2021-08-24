@@ -4,8 +4,7 @@ pipeline {
         stage('nginx') {
             agent {
                 docker {
-                    image 'nginx:alpine'
-                    args '--privileged -v $HOME/.m2:/home/jenkins/.m2 -ti -u 496 -e MAVEN_CONFIG=/home/jenkins/.m2 -e MAVEN_OPTS=-Xmx2048m'
+                    image 'nginx:alpine'                    
                 }
             }
             steps {                
@@ -15,8 +14,7 @@ pipeline {
         stage('node') {
             agent {
                 docker {
-                    image 'node:alpine'
-                    args '--privileged -v $HOME/.m2:/home/jenkins/.m2 -ti -u 496 -e MAVEN_CONFIG=/home/jenkins/.m2 -e MAVEN_OPTS=-Xmx2048m'
+                    image 'node:alpine'                    
                 }
             }
             steps {                
@@ -26,8 +24,7 @@ pipeline {
         stage('mysql') {
             agent {
                 docker {
-                    image 'mysql:alpine'
-                    args '--privileged -v $HOME/.m2:/home/jenkins/.m2 -ti -u 496 -e MAVEN_CONFIG=/home/jenkins/.m2 -e MAVEN_OPTS=-Xmx2048m'
+                    image 'mysql:alpine'                    
                 }
             }
             steps {                
