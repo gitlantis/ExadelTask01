@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {                
-                sh 'sudo docker ps -a'                
+                sh 'nginx -v'                
             }
         }
         stage('node') {
@@ -18,7 +18,7 @@ pipeline {
                 }
             }
             steps {                
-                sh 'sudo docker ps -a'                
+                sh 'node --version'                
             }
         }
         stage('mysql') {
@@ -28,7 +28,7 @@ pipeline {
                 }
             }
             steps {                
-                sh 'sudo docker ps -a'                
+                sh 'mysql -V'                
             }
         }
     }
