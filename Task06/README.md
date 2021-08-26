@@ -8,14 +8,14 @@ following you can see jenkins image running on port ```8080```
 
 ### **Creating docker agets using docker images**
 to create docker agents we have to install ```docker pipeline``` plugin
-three agens agents creationscript is inide of ```jenkins_agents```
+three agens agents creationscript is inide of ```jenkins-docker-agents```
 1. ```nginx```
 2. ```node```
 3. ```mysql```
 
 after running each agent prints own version 
 
-log file is inside of ```jenkins_agents_log.txt```
+log file is inside of ```jenkins-docker-agents_log.txt```
 
 ### **Freestyle Job**
 
@@ -32,8 +32,8 @@ created freestyle job echoes ```today is ....``` and prints datetime
 ![jenkins image](./assets/result.png)
 
 ### **Three agents installed docker in them**
-Running jenkins docker image on local machine. 
-To install virtualbox inside of virtual OS I have got some troubles.
+Jenkins docker image running on local machine. 
+To install virtualbox inside of virtual OS I have got some troubles,
 that's why I made desition to install jenkins image on my local machine 
 and running three agents using virtualbox.
 
@@ -43,7 +43,27 @@ We have to add nodes first:
 
 ![jenkins image](./assets/jagents.png)
 
-agents are connected successfully
+agents are connected successfully.
+
+configuration file is ```jenkins_agents``` and build resutlt log is inside of ```jenkins-agents_log.txt```
+
+### unsucessfully completed encryption task
+
+folder ```jenkins_docker``` contains encryption method
+
+#### 1 build image ```jenkins_docker/hello-world-html``` from previous task
+
+```docker build --tag="html-image" .```
+
+created exrternal secret using following command:
+
+```echo "TestUser02" | docker secret create my_secret -```
 
 
-java -jar agent.jar -jnlpUrl http://192.168.1.5:8080/computer/ubuntu01/jenkins-agent.jnlp -secret 3f9b92ed121d0bfc96700c19fc6034140963a744e807ca94d9be28e14e06510e -workDir "/temp/ubuntu_agent"
+deployed using ```jenkins_docker/docker-compose.yaml```
+
+```docker stack deploy -c docker-compose.yaml external_secret```
+
+image build unsucessfully I cannot tead encrypted value from ```/run/secrets/my_secret``` diraectory
+
+
