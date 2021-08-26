@@ -1,0 +1,256 @@
+Started by user Gitlantis
+Obtained Task06/jenkins-agents from git https://github.com/gitlantis/ExadelTask01.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] stage
+[Pipeline] { (node01)
+[Pipeline] node
+Running on agent1 in /home/jenkins/workspace/docker-agents-pipe
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential agent1
+Cloning the remote Git repository
+Cloning repository https://github.com/gitlantis/ExadelTask01.git
+ > git init /home/jenkins/workspace/docker-agents-pipe # timeout=10
+Fetching upstream changes from https://github.com/gitlantis/ExadelTask01.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+using GIT_SSH to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/gitlantis/ExadelTask01.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 3b68d6c13c2ed6d4e3332abef91e7d204889a2ca (refs/remotes/origin/master)
+ > git config remote.origin.url https://github.com/gitlantis/ExadelTask01.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3b68d6c13c2ed6d4e3332abef91e7d204889a2ca # timeout=10
+Commit message: "fix"
+First time build. Skipping changelog.
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker ps -a
+CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS                           PORTS                                                                                      NAMES
+f0a47daf1563        ssh-agent:latest            "setup-sshd"             14 minutes ago      Up 14 minutes                    0.0.0.0:24->22/tcp, :::24->22/tcp                                                          agent3
+201ebd25abb2        ssh-agent:latest            "setup-sshd"             15 minutes ago      Up 15 minutes                    0.0.0.0:23->22/tcp, :::23->22/tcp                                                          agent2
+8f44a2c59919        ssh-agent:latest            "setup-sshd"             22 minutes ago      Up 22 minutes                    0.0.0.0:22->22/tcp, :::22->22/tcp                                                          agent1
+91b67cf54593        cc773f17eb5a                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                elated_kowalevski
+d0c3d3f994e6        aead9e1726e8                "/bin/sh -c 'chown $���"   About an hour ago   Exited (1) About an hour ago                                                                                                trusting_mendel
+70e86a2682e8        cc773f17eb5a                "/bin/sh -c 'groupad���"   About an hour ago   Exited (9) About an hour ago                                                                                                tender_vaughan
+78fa7f5f5a0c        3b8ae8708240                "/bin/sh -c 'apt ins���"   About an hour ago   Exited (100) About an hour ago                                                                                              hardcore_mclean
+2e598be1e69c        3b8ae8708240                "/bin/sh -c 'apt ins���"   About an hour ago   Exited (100) About an hour ago                                                                                              compassionate_chatterjee
+e20e1db0a712        cb0efc295ef9                "/bin/sh -c 'chmod +���"   About an hour ago   Exited (1) About an hour ago                                                                                                distracted_moore
+24f4e359358f        cb0efc295ef9                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                serene_volhard
+61d74e6ab974        cb0efc295ef9                "/bin/sh -c 'systemc���"   About an hour ago   Exited (1) About an hour ago                                                                                                mystifying_dewdney
+6911e33b725b        cb0efc295ef9                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                compassionate_jones
+807a9b3d4652        3b8ae8708240                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              happy_faraday
+340e45d87064        3b8ae8708240                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              elastic_swanson
+df6dc2a81ac3        e5c750ea2e3b                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              zealous_shaw
+c1825a30901c        e5306934e5a5                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              unruffled_thompson
+f95609106c86        04c8eb242157                "/bin/sh -c 'curl -f���"   About an hour ago   Exited (127) About an hour ago                                                                                              epic_shaw
+df98d045aa51        b2499e049274                "/bin/sh -c 'apt ins���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      upbeat_gauss
+6d0abedb09c2        67ba06aa05e7                "/bin/sh -c 'apt-get���"   2 hours ago         Exited (100) 2 hours ago                                                                                                    trusting_banzai
+15387c1df893        b2499e049274                "/bin/sh -c 'apt ins���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      silly_swirles
+eea040d7e515        67ba06aa05e7                "/bin/sh -c 'apt-get���"   2 hours ago         Exited (100) 2 hours ago                                                                                                    strange_lovelace
+1af15bbd88dc        8f438de124df                "/bin/sh -c 'sudo ap���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    vigilant_rhodes
+81bffe1ef5f9        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      mystifying_shtern
+86422fed327b        a23a35b1a7b0                "/bin/sh -c 'usermod���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    youthful_bohr
+240219eaa341        a23a35b1a7b0                "/bin/sh -c 'adduser���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      dreamy_solomon
+bfc3ec8671cf        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      heuristic_mendel
+b87fcb3cecf2        97355bad6f63                "/bin/sh -c 'service���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      tender_proskuriakova
+6bf65a28b3b3        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      upbeat_bohr
+8ffcf3e83949        a23a35b1a7b0                "/bin/sh -c 'systemc���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    intelligent_boyd
+7fae38e494eb        a23a35b1a7b0                "/bin/sh -c 'usermod���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    charming_kepler
+c634ffaddd4d        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      thirsty_kowalevski
+097371ecb032        a23a35b1a7b0                "/bin/sh -c 'groupad���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    jovial_galois
+601b2cddcd58        f922a66329e7                "/bin/sh -c 'apk add���"   2 hours ago         Exited (2) 2 hours ago                                                                                                      practical_ishizaka
+6da6a164c71d        e95451a8afab                "/bin/sh -c 'chmod 7���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      friendly_bartik
+e68399f0c0d5        fd7217f53265                "/bin/sh -c 'rc-upda���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    keen_mclaren
+4ae3ba319e57        fd7217f53265                "/bin/sh -c 'rc-upda���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    infallible_montalcini
+9023eb09702a        f156aa101f1b                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      adoring_leakey
+ebf50e10700f        89b4de2b94ff                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      magical_galileo
+960c289c66f4        461d5a82641b                "/bin/sh -c 'vi /var���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      trusting_edison
+0ab7da7de2b7        89b4de2b94ff                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      practical_keldysh
+947211fafa50        461d5a82641b                "/bin/sh -c 'chmod +���"   3 hours ago         Exited (1) 3 hours ago                                                                                                      boring_wescoff
+15c55cbb3c18        461d5a82641b                "/bin/sh -c 'docker ���"   3 hours ago         Exited (1) 3 hours ago                                                                                                      reverent_raman
+7fe1c9dd2da0        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   3 hours ago         Up 3 hours                       0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   wizardly_edison
+c10e7dcb1ae3        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   3 hours ago         Exited (130) 3 hours ago                                                                                                    nervous_rhodes
+c020927c5256        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   5 hours ago         Exited (255) 3 hours ago         0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   frosty_knuth
+1451e9a01e86        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   6 hours ago         Exited (130) 6 hours ago                                                                                                    boring_mclean
+569aa2568662        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   6 hours ago         Exited (130) 6 hours ago                                                                                                    clever_gould
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (node02)
+[Pipeline] node
+Running on agent2 in /home/jenkins/workspace/docker-agents-pipe
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential agent1
+Cloning the remote Git repository
+Cloning repository https://github.com/gitlantis/ExadelTask01.git
+ > git init /home/jenkins/workspace/docker-agents-pipe # timeout=10
+Fetching upstream changes from https://github.com/gitlantis/ExadelTask01.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+using GIT_SSH to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/gitlantis/ExadelTask01.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 3b68d6c13c2ed6d4e3332abef91e7d204889a2ca (refs/remotes/origin/master)
+ > git config remote.origin.url https://github.com/gitlantis/ExadelTask01.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3b68d6c13c2ed6d4e3332abef91e7d204889a2ca # timeout=10
+Commit message: "fix"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker ps -a
+CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS                           PORTS                                                                                      NAMES
+f0a47daf1563        ssh-agent:latest            "setup-sshd"             15 minutes ago      Up 15 minutes                    0.0.0.0:24->22/tcp, :::24->22/tcp                                                          agent3
+201ebd25abb2        ssh-agent:latest            "setup-sshd"             15 minutes ago      Up 15 minutes                    0.0.0.0:23->22/tcp, :::23->22/tcp                                                          agent2
+8f44a2c59919        ssh-agent:latest            "setup-sshd"             22 minutes ago      Up 22 minutes                    0.0.0.0:22->22/tcp, :::22->22/tcp                                                          agent1
+91b67cf54593        cc773f17eb5a                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                elated_kowalevski
+d0c3d3f994e6        aead9e1726e8                "/bin/sh -c 'chown $���"   About an hour ago   Exited (1) About an hour ago                                                                                                trusting_mendel
+70e86a2682e8        cc773f17eb5a                "/bin/sh -c 'groupad���"   About an hour ago   Exited (9) About an hour ago                                                                                                tender_vaughan
+78fa7f5f5a0c        3b8ae8708240                "/bin/sh -c 'apt ins���"   About an hour ago   Exited (100) About an hour ago                                                                                              hardcore_mclean
+2e598be1e69c        3b8ae8708240                "/bin/sh -c 'apt ins���"   About an hour ago   Exited (100) About an hour ago                                                                                              compassionate_chatterjee
+e20e1db0a712        cb0efc295ef9                "/bin/sh -c 'chmod +���"   About an hour ago   Exited (1) About an hour ago                                                                                                distracted_moore
+24f4e359358f        cb0efc295ef9                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                serene_volhard
+61d74e6ab974        cb0efc295ef9                "/bin/sh -c 'systemc���"   About an hour ago   Exited (1) About an hour ago                                                                                                mystifying_dewdney
+6911e33b725b        cb0efc295ef9                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                compassionate_jones
+807a9b3d4652        3b8ae8708240                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              happy_faraday
+340e45d87064        3b8ae8708240                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              elastic_swanson
+df6dc2a81ac3        e5c750ea2e3b                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              zealous_shaw
+c1825a30901c        e5306934e5a5                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              unruffled_thompson
+f95609106c86        04c8eb242157                "/bin/sh -c 'curl -f���"   About an hour ago   Exited (127) About an hour ago                                                                                              epic_shaw
+df98d045aa51        b2499e049274                "/bin/sh -c 'apt ins���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      upbeat_gauss
+6d0abedb09c2        67ba06aa05e7                "/bin/sh -c 'apt-get���"   2 hours ago         Exited (100) 2 hours ago                                                                                                    trusting_banzai
+15387c1df893        b2499e049274                "/bin/sh -c 'apt ins���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      silly_swirles
+eea040d7e515        67ba06aa05e7                "/bin/sh -c 'apt-get���"   2 hours ago         Exited (100) 2 hours ago                                                                                                    strange_lovelace
+1af15bbd88dc        8f438de124df                "/bin/sh -c 'sudo ap���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    vigilant_rhodes
+81bffe1ef5f9        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      mystifying_shtern
+86422fed327b        a23a35b1a7b0                "/bin/sh -c 'usermod���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    youthful_bohr
+240219eaa341        a23a35b1a7b0                "/bin/sh -c 'adduser���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      dreamy_solomon
+bfc3ec8671cf        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      heuristic_mendel
+b87fcb3cecf2        97355bad6f63                "/bin/sh -c 'service���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      tender_proskuriakova
+6bf65a28b3b3        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      upbeat_bohr
+8ffcf3e83949        a23a35b1a7b0                "/bin/sh -c 'systemc���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    intelligent_boyd
+7fae38e494eb        a23a35b1a7b0                "/bin/sh -c 'usermod���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    charming_kepler
+c634ffaddd4d        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      thirsty_kowalevski
+097371ecb032        a23a35b1a7b0                "/bin/sh -c 'groupad���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    jovial_galois
+601b2cddcd58        f922a66329e7                "/bin/sh -c 'apk add���"   2 hours ago         Exited (2) 2 hours ago                                                                                                      practical_ishizaka
+6da6a164c71d        e95451a8afab                "/bin/sh -c 'chmod 7���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      friendly_bartik
+e68399f0c0d5        fd7217f53265                "/bin/sh -c 'rc-upda���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    keen_mclaren
+4ae3ba319e57        fd7217f53265                "/bin/sh -c 'rc-upda���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    infallible_montalcini
+9023eb09702a        f156aa101f1b                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      adoring_leakey
+ebf50e10700f        89b4de2b94ff                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      magical_galileo
+960c289c66f4        461d5a82641b                "/bin/sh -c 'vi /var���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      trusting_edison
+0ab7da7de2b7        89b4de2b94ff                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      practical_keldysh
+947211fafa50        461d5a82641b                "/bin/sh -c 'chmod +���"   3 hours ago         Exited (1) 3 hours ago                                                                                                      boring_wescoff
+15c55cbb3c18        461d5a82641b                "/bin/sh -c 'docker ���"   3 hours ago         Exited (1) 3 hours ago                                                                                                      reverent_raman
+7fe1c9dd2da0        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   3 hours ago         Up 3 hours                       0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   wizardly_edison
+c10e7dcb1ae3        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   3 hours ago         Exited (130) 3 hours ago                                                                                                    nervous_rhodes
+c020927c5256        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   5 hours ago         Exited (255) 3 hours ago         0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   frosty_knuth
+1451e9a01e86        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   6 hours ago         Exited (130) 6 hours ago                                                                                                    boring_mclean
+569aa2568662        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   6 hours ago         Exited (130) 6 hours ago                                                                                                    clever_gould
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (node03)
+[Pipeline] node
+Running on agent3 in /home/jenkins/workspace/docker-agents-pipe
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential agent1
+Cloning the remote Git repository
+Cloning repository https://github.com/gitlantis/ExadelTask01.git
+ > git init /home/jenkins/workspace/docker-agents-pipe # timeout=10
+Fetching upstream changes from https://github.com/gitlantis/ExadelTask01.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+using GIT_SSH to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/gitlantis/ExadelTask01.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git config remote.origin.url https://github.com/gitlantis/ExadelTask01.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 3b68d6c13c2ed6d4e3332abef91e7d204889a2ca (refs/remotes/origin/master)
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3b68d6c13c2ed6d4e3332abef91e7d204889a2ca # timeout=10
+Commit message: "fix"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker ps -a
+CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS                           PORTS                                                                                      NAMES
+f0a47daf1563        ssh-agent:latest            "setup-sshd"             15 minutes ago      Up 15 minutes                    0.0.0.0:24->22/tcp, :::24->22/tcp                                                          agent3
+201ebd25abb2        ssh-agent:latest            "setup-sshd"             15 minutes ago      Up 15 minutes                    0.0.0.0:23->22/tcp, :::23->22/tcp                                                          agent2
+8f44a2c59919        ssh-agent:latest            "setup-sshd"             23 minutes ago      Up 23 minutes                    0.0.0.0:22->22/tcp, :::22->22/tcp                                                          agent1
+91b67cf54593        cc773f17eb5a                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                elated_kowalevski
+d0c3d3f994e6        aead9e1726e8                "/bin/sh -c 'chown $���"   About an hour ago   Exited (1) About an hour ago                                                                                                trusting_mendel
+70e86a2682e8        cc773f17eb5a                "/bin/sh -c 'groupad���"   About an hour ago   Exited (9) About an hour ago                                                                                                tender_vaughan
+78fa7f5f5a0c        3b8ae8708240                "/bin/sh -c 'apt ins���"   About an hour ago   Exited (100) About an hour ago                                                                                              hardcore_mclean
+2e598be1e69c        3b8ae8708240                "/bin/sh -c 'apt ins���"   About an hour ago   Exited (100) About an hour ago                                                                                              compassionate_chatterjee
+e20e1db0a712        cb0efc295ef9                "/bin/sh -c 'chmod +���"   About an hour ago   Exited (1) About an hour ago                                                                                                distracted_moore
+24f4e359358f        cb0efc295ef9                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                serene_volhard
+61d74e6ab974        cb0efc295ef9                "/bin/sh -c 'systemc���"   About an hour ago   Exited (1) About an hour ago                                                                                                mystifying_dewdney
+6911e33b725b        cb0efc295ef9                "/bin/sh -c 'usermod���"   About an hour ago   Exited (2) About an hour ago                                                                                                compassionate_jones
+807a9b3d4652        3b8ae8708240                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              happy_faraday
+340e45d87064        3b8ae8708240                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              elastic_swanson
+df6dc2a81ac3        e5c750ea2e3b                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              zealous_shaw
+c1825a30901c        e5306934e5a5                "/bin/sh -c 'apt-get���"   About an hour ago   Exited (100) About an hour ago                                                                                              unruffled_thompson
+f95609106c86        04c8eb242157                "/bin/sh -c 'curl -f���"   About an hour ago   Exited (127) About an hour ago                                                                                              epic_shaw
+df98d045aa51        b2499e049274                "/bin/sh -c 'apt ins���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      upbeat_gauss
+6d0abedb09c2        67ba06aa05e7                "/bin/sh -c 'apt-get���"   2 hours ago         Exited (100) 2 hours ago                                                                                                    trusting_banzai
+15387c1df893        b2499e049274                "/bin/sh -c 'apt ins���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      silly_swirles
+eea040d7e515        67ba06aa05e7                "/bin/sh -c 'apt-get���"   2 hours ago         Exited (100) 2 hours ago                                                                                                    strange_lovelace
+1af15bbd88dc        8f438de124df                "/bin/sh -c 'sudo ap���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    vigilant_rhodes
+81bffe1ef5f9        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      mystifying_shtern
+86422fed327b        a23a35b1a7b0                "/bin/sh -c 'usermod���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    youthful_bohr
+240219eaa341        a23a35b1a7b0                "/bin/sh -c 'adduser���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      dreamy_solomon
+bfc3ec8671cf        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      heuristic_mendel
+b87fcb3cecf2        97355bad6f63                "/bin/sh -c 'service���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      tender_proskuriakova
+6bf65a28b3b3        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      upbeat_bohr
+8ffcf3e83949        a23a35b1a7b0                "/bin/sh -c 'systemc���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    intelligent_boyd
+7fae38e494eb        a23a35b1a7b0                "/bin/sh -c 'usermod���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    charming_kepler
+c634ffaddd4d        a23a35b1a7b0                "/bin/sh -c 'addgrou���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      thirsty_kowalevski
+097371ecb032        a23a35b1a7b0                "/bin/sh -c 'groupad���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    jovial_galois
+601b2cddcd58        f922a66329e7                "/bin/sh -c 'apk add���"   2 hours ago         Exited (2) 2 hours ago                                                                                                      practical_ishizaka
+6da6a164c71d        e95451a8afab                "/bin/sh -c 'chmod 7���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      friendly_bartik
+e68399f0c0d5        fd7217f53265                "/bin/sh -c 'rc-upda���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    keen_mclaren
+4ae3ba319e57        fd7217f53265                "/bin/sh -c 'rc-upda���"   2 hours ago         Exited (127) 2 hours ago                                                                                                    infallible_montalcini
+9023eb09702a        f156aa101f1b                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      adoring_leakey
+ebf50e10700f        89b4de2b94ff                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      magical_galileo
+960c289c66f4        461d5a82641b                "/bin/sh -c 'vi /var���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      trusting_edison
+0ab7da7de2b7        89b4de2b94ff                "/bin/sh -c 'chmod +���"   2 hours ago         Exited (1) 2 hours ago                                                                                                      practical_keldysh
+947211fafa50        461d5a82641b                "/bin/sh -c 'chmod +���"   3 hours ago         Exited (1) 3 hours ago                                                                                                      boring_wescoff
+15c55cbb3c18        461d5a82641b                "/bin/sh -c 'docker ���"   3 hours ago         Exited (1) 3 hours ago                                                                                                      reverent_raman
+7fe1c9dd2da0        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   3 hours ago         Up 3 hours                       0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   wizardly_edison
+c10e7dcb1ae3        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   3 hours ago         Exited (130) 3 hours ago                                                                                                    nervous_rhodes
+c020927c5256        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   5 hours ago         Exited (255) 3 hours ago         0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:50000->50000/tcp, :::50000->50000/tcp   frosty_knuth
+1451e9a01e86        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   6 hours ago         Exited (130) 6 hours ago                                                                                                    boring_mclean
+569aa2568662        jenkins/jenkins:lts-jdk11   "/sbin/tini -- /usr/���"   6 hours ago         Exited (130) 6 hours ago                                                                                                    clever_gould
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] End of Pipeline
+Finished: SUCCESS

@@ -1,0 +1,15 @@
+pipeline {
+  agent {
+    dockerfile{
+      filename ./docker-encrypt/Dockerfile
+    } 
+  }
+  stages {
+    stage('agent01') {
+      steps {
+        sh 'lsb_release'
+      }
+    }          
+  }
+}
+

@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-ENV DEVOPS="gitlantis"
+ENV DEVOPS=/run/secrets/my_secret
 
 COPY ./*.html /usr/share/nginx/html
 COPY ./create_onstart.sh /docker-entrypoint.d

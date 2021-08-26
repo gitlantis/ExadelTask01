@@ -35,6 +35,18 @@ created freestyle job echoes ```today is ....``` and prints datetime
 
 ![jenkins image](./assets/result.png)
 
+### **Creating pipeline**
+
+pipeline configuration is in ```jenkins-agents``` file
+console log is insid of ```jenkins-agents_log``` file
+
+it prints ```docker ps -a ``` afrter completing every stage.
+
+### **Encrypted variables**
+
+folder ```docker-encrypt``` contains solution from previous task, pushid to dockerhub: ```gitlantis/docker-encrypt:latest```
+
+
 
 ---------  fake   -------------
 to create docker agents we have to install ```docker pipeline``` plugin
