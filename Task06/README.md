@@ -64,6 +64,6 @@ deployed using ```jenkins_docker/docker-compose.yaml```
 
 ```docker stack deploy -c docker-compose.yaml external_secret```
 
-image build unsucessfully I cannot tead encrypted value from ```/run/secrets/my_secret``` diraectory
+image build unsucessfully I cannot read encrypted value from ```/run/secrets/my_secret``` diraectory
 
 
