@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('node01') {
             agent {
-               label 'ubuntu01'
+               label 'agent1'
             }
             steps {                
                 sh 'docker ps -a'                
@@ -11,7 +11,7 @@ pipeline {
         }
         stage('node02') {
             agent {
-                label 'ubuntu02'
+                label 'agent2'
             }
             steps {                
                 sh 'docker ps -a'                
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('node03') {
             agent {
-                label 'ubuntu03'
+                label 'agent3'
             }
             steps {                
                 sh 'docker ps -a'                

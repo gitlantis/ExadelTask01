@@ -7,15 +7,19 @@ following you can see jenkins image running on port ```8080```
 ![jenkins image](./assets/docker_image.png)
 
 ### **Creating docker agets using docker images**
-to create docker agents we have to install ```docker pipeline``` plugin
-three agens agents creationscript is inide of ```jenkins-docker-agents```
-1. ```nginx```
-2. ```node```
-3. ```mysql```
 
-after running each agent prints own version 
+[Container agent documentation](https://www.jenkins.io/doc/book/using/using-agents/)
 
-log file is inside of ```jenkins-docker-agents_log.txt```
+custom ssh-agent docker files path: ```jenkins-ssh-agent/Dockerfile```
+
+build image: ```docker build --tag="ssh-agent" .```
+
+run docker: 
+```docker run -v /var/run/docker.sock:/var/run/docker.sock -d --rm --name=agent1 -p 22:22 -e "JENKINS_AGENT_SSH_PUBKEY=[public key]]" ssh-agent:latest```
+
+created three docker qagents, working on ssh ports 22, 23, 24 
+
+![jenkins image](./assets/agents.png)
 
 ### **Freestyle Job**
 
@@ -30,6 +34,20 @@ created freestyle job echoes ```today is ....``` and prints datetime
 **result:**
 
 ![jenkins image](./assets/result.png)
+
+
+---------  fake   -------------
+to create docker agents we have to install ```docker pipeline``` plugin
+three agens agents creationscript is inide of ```jenkins-docker-agents```
+1. ```nginx```
+2. ```node```
+3. ```mysql```
+
+after running each agent prints own version 
+
+log file is inside of ```jenkins-docker-agents_log.txt```
+
+
 
 ### **Three agents installed docker in them**
 Jenkins docker image running on local machine. 
