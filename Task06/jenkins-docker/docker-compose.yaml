@@ -1,0 +1,21 @@
+version: "3.9"  
+
+secrets:
+  my_secret:
+    external: true
+
+services:
+  web:
+    image: html-image:latest
+    ports:
+      - 8083:80
+    restart: on-failure
+    deploy:
+      mode: replicated
+      replicas: 5
+    environment:
+      - DEVOPS=/run/secrets/my_secret
+    secrets:
+      - my_secret
+
+
