@@ -31,5 +31,19 @@ created freestyle job echoes ```today is ....``` and prints datetime
 
 ![jenkins image](./assets/result.png)
 
-### ****
+### **Three agents installed docker in them**
+Running jenkins docker image on local machine. 
+To install virtualbox inside of virtual OS I have got some troubles.
+that's why I made desition to install jenkins image on my local machine 
+and running three agents using virtualbox.
 
+![jenkins image](./assets/agents.png)
+
+We have to add nodes first:
+
+![jenkins image](./assets/jagents.png)
+
+agents are connected successfully
+
+
+java -jar agent.jar -jnlpUrl http://192.168.1.5:8080/computer/ubuntu01/jenkins-agent.jnlp -secret 3f9b92ed121d0bfc96700c19fc6034140963a744e807ca94d9be28e14e06510e -workDir "/temp/ubuntu_agent"

@@ -1,34 +1,28 @@
 pipeline {
     agent none
     stages {
-        stage('nginx') {
+        stage('node01') {
             agent {
-                docker {
-                    image 'nginx:alpine'                    
-                }
+               label 'ubuntu01'
             }
             steps {                
-                sh 'nginx -v'                
+                sh 'docker ps -a'                
             }
         }
-        stage('node') {
+        stage('node02') {
             agent {
-                docker {
-                    image 'node:alpine'                    
-                }
+                label 'ubuntu02'
             }
             steps {                
-                sh 'node --version'                
+                sh 'docker ps -a'                
             }
         }
-        stage('mysql') {
+        stage('node03') {
             agent {
-                docker {
-                    image 'mysql'                    
-                }
+                label 'ubuntu03'
             }
             steps {                
-                sh 'mysql -V'                
+                sh 'docker ps -a'                
             }
         }
     }
