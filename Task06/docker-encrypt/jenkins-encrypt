@@ -4,11 +4,8 @@ pipeline {
   }
   stages {
     stage('build') {
-      steps {        
-        sh 'cd Task06/docker-encrypt'
-        sh 'pwd'
-        sh 'ls'        
-        sh 'docker build --tag="encrypt-test" .'
+      steps {                
+        sh 'docker build --tag="encrypt-test" /Task06/docker-encrypt'
         sh 'docker run 8081:80 encrypt-test:latest'
       }
     }          
