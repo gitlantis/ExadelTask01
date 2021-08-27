@@ -8,7 +8,7 @@ pipeline {
         sh 'pwd'
         sh 'ls'
         sh 'docker build --tag="encrypt-test" ./Task06/docker-encrypt'
-        sh 'docker run 8081:80 encrypt-test:latest'
+        sh 'docker run -it -d -p 8081:80 encrypt-test:latest'
       }
     }          
   }
