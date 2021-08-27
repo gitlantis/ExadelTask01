@@ -47,7 +47,7 @@ it prints ```docker ps -a ``` afrter completing every stage.
 folder ```docker-encrypt``` contains solution from previous task, pushid to dockerhub: ```gitlantis/docker-encrypt:latest```
 
 
-required docker pipeline plugin
+
 
 Task06/docker-encrypt/jenkins-encrypt
 ---------  fake   -------------

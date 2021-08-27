@@ -1,11 +1,14 @@
 pipeline {
   agent {
-    dockerfile true
+    label 'agent1'
   }
   stages {
     stage('build') {
       steps {        
-        sh 'docker ps -a'
+        sh 'pwd'
+        sh 'ls'
+        sh 'docker build --tag="encrypt-test" .'
+        sh 'docker run 8081:80 encrypt-test:latest'
       }
     }          
   }
