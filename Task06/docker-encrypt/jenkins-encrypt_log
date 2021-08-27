@@ -1,0 +1,76 @@
+Started by user Gitlantis
+Obtained Task06/docker-encrypt/jenkins-encrypt from git https://github.com/gitlantis/ExadelTask01.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on agent1 in /home/jenkins/workspace/jenkins-docker-pipe01
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential agent1
+Fetching changes from the remote Git repository
+Checking out Revision c9fcaf184c7411d0f2231ddc62e9adf36a5b79da (refs/remotes/origin/master)
+Commit message: "move dockerfile"
+ > git rev-parse --resolve-git-dir /home/jenkins/workspace/jenkins-docker-pipe01/.git # timeout=10
+ > git config remote.origin.url https://github.com/gitlantis/ExadelTask01.git # timeout=10
+Fetching upstream changes from https://github.com/gitlantis/ExadelTask01.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+using GIT_SSH to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/gitlantis/ExadelTask01.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c9fcaf184c7411d0f2231ddc62e9adf36a5b79da # timeout=10
+ > git rev-list --no-walk 0edc93751bd772e316979f81e47bbed0f7286ee8 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (build)
+[Pipeline] sh
++ pwd
+/home/jenkins/workspace/jenkins-docker-pipe01
+[Pipeline] sh
++ ls
+README.md
+Task01
+Task02
+Task03
+Task04
+Task05
+Task06
+[Pipeline] sh
++ docker build --tag=encrypt-test ./Task06/docker-encrypt
+Sending build context to Docker daemon   5.12kB
+
+Step 1/5 : FROM nginx:alpine
+ ---> 7ce0143dee37
+Step 2/5 : ENV DEVOPS=/run/secrets/my_secret
+ ---> Using cache
+ ---> 32b7b7924594
+Step 3/5 : COPY *.html /usr/share/nginx/html
+ ---> Using cache
+ ---> e1c2b5be9ce7
+Step 4/5 : COPY create_onstart.sh /docker-entrypoint.d
+ ---> Using cache
+ ---> 3878b88a3dfd
+Step 5/5 : RUN chmod +x /docker-entrypoint.d/create_onstart.sh
+ ---> Using cache
+ ---> df1835cfd04e
+Successfully built df1835cfd04e
+Successfully tagged encrypt-test:latest
+[Pipeline] sh
++ docker run -it -d -p 8081:80 encrypt-test:latest
+4a5ac22a54721099bf9f347f80cf28fdcfe4c50957f05aced9bcca867aaad139
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

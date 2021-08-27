@@ -44,58 +44,10 @@ it prints ```docker ps -a ``` afrter completing every stage.
 
 ### **Encrypted variables**
 
-folder ```docker-encrypt``` contains solution from previous task, pushid to dockerhub: ```gitlantis/docker-encrypt:latest```
+folder ```docker-encrypt``` contains solution from previous task, pushid to 
 
+to run this you must create pipeline project and
+you have to speciffy source path ```Task06/docker-encrypt/jenkins-encrypt``` for pipeline
 
-
-
-Task06/docker-encrypt/jenkins-encrypt
----------  fake   -------------
-to create docker agents we have to install ```docker pipeline``` plugin
-three agens agents creationscript is inide of ```jenkins-docker-agents```
-1. ```nginx```
-2. ```node```
-3. ```mysql```
-
-after running each agent prints own version 
-
-log file is inside of ```jenkins-docker-agents_log.txt```
-
-
-
-### **Three agents installed docker in them**
-Jenkins docker image running on local machine. 
-To install virtualbox inside of virtual OS I have got some troubles,
-that's why I made desition to install jenkins image on my local machine 
-and running three agents using virtualbox.
-
-![jenkins image](./assets/agents.png)
-
-We have to add nodes first:
-
-![jenkins image](./assets/jagents.png)
-
-agents are connected successfully.
-
-configuration file is ```jenkins_agents``` and build resutlt log is inside of ```jenkins-agents_log.txt```
-
-### unsucessfully completed encryption task
-
-folder ```jenkins_docker``` contains encryption method
-
-#### 1 build image ```jenkins_docker/hello-world-html``` from previous task
-
-```docker build --tag="html-image" .```
-
-created exrternal secret using following command:
-
-```echo "TestUser02" | docker secret create my_secret -```
-
-
-deployed using ```jenkins_docker/docker-compose.yaml```
-
-```docker stack deploy -c docker-compose.yaml external_secret```
-
-image build unsucessfully I cannot read encrypted value from ```/run/secrets/my_secret``` diraectory
-
+console log result is inside of ```Task06/docker-encrypt/jenkins-encrypt_log```
 
