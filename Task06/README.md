@@ -48,6 +48,9 @@ folder ```docker-encrypt``` contains solution from previous task, pushid to dock
 
 
 
+required docker pipeline plugin
+
+Task06/docker-encrypt/jenkins-encrypt
 ---------  fake   -------------
 to create docker agents we have to install ```docker pipeline``` plugin
 three agens agents creationscript is inide of ```jenkins-docker-agents```
