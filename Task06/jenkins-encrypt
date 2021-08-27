@@ -1,13 +1,11 @@
 pipeline {
   agent {
-    dockerfile{
-      filename ./docker-encrypt/Dockerfile
-    } 
+    dockerfile true
   }
   stages {
-    stage('agent01') {
-      steps {
-        sh 'lsb_release'
+    stage('build') {
+      steps {        
+        sh 'docker ps -a'
       }
     }          
   }
