@@ -44,7 +44,7 @@ it prints ```docker ps -a ``` afrter completing every stage.
 
 ### **Encrypted variables**
 
-folder ```docker-encrypt``` contains solution from previous task, pushid to 
+folder ```docker-encrypt``` contains solution from previous task
 
 to run this you must create pipeline project and
 you have to speciffy source path ```Task06/docker-encrypt/jenkins-encrypt``` for pipeline
