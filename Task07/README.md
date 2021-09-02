@@ -1,14 +1,15 @@
 # Monnitoring (Task07)
 
 ## 1. Zabbix
-
 ### 1.1 Install on server, configure web and base
 
 prereqisits:
 - nginx
 - mysql
 
-to install zabbix used this [documentation](https://www.zabbix.com/download?zabbix=5.0&os_distribution=ubuntu&os_version=20.04_focal&db=mysql&ws=nginx)
+Installation will go on prepeated ```Ubuntu VM```
+
+To install zabbix used this [documentation](https://www.zabbix.com/download?zabbix=5.0&os_distribution=ubuntu&os_version=20.04_focal&db=mysql&ws=nginx)
 
 ![start page](./assets/Screenshot_1.png)
 
@@ -24,6 +25,7 @@ to configure zabbix agent:
 ```sudo nano /etc/zabbix/zabbix_agentd.conf```
 ------------------
 ```sh
+
 #zabbix server address
 Server=192.168.10.2
 
