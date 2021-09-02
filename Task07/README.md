@@ -19,9 +19,11 @@ result after configuration
 ### 1.2 Prepare VM or instances. Install Zabbix agents on previously prepared servers or VM.
 
 ```sudo apt update```
+
 ```sudo apt install zabbix-agent```
 
-to configure zabbix agent:
+Configuring zabbix agent:
+
 ```sudo nano /etc/zabbix/zabbix_agentd.conf```
 ------------------
 ```sh
@@ -37,6 +39,7 @@ Hostname=ip-172-31-11-76.eu-central-1.compute.internal
 ```
 
 ```sudo systemctl restart zabbix-agent```
+
 ```sudo systemctl status zabbix-agent```
 
 ## 2. ELK: Nobody is forgotten and nothing is forgotten.
@@ -56,17 +59,17 @@ all docker configuration is inside of ```docker-compose.yml``` file
 you may requred to give permession to ```/var/lib/docker/containers/``` folder and ```docker.sock``` file 
 
 ### 2.2 Organize collection of logs from docker to ELK and receive data from running containers
-in the ```Management > Stack Management > Kibana > Index Pattern``` created pattern whi ```filebeat-*```
+In the ```Management > Stack Management > Kibana > Index Pattern``` created pattern with ```filebeat-*``` regular expression
+
 all fields from elasticsearch automatically will be available in this pattern
 
-when we select ```Analytics > Discover``` you can se all logs from selected pattern by ```@timestamp```
+when we select ```Analytics > Discover``` you can see all logs from selected pattern by ```@timestamp```
 
 ![container list kibana](./assets/kibana_log.png)
 
 ### 2.3 Customize your dashboards in ELK
 
-to customize dashboard
-1. we have to add custom dashboard 
+1. we have to add custom dashboard by going to ```Analytics > Dashboard```
 
 ![container list kibana](./assets/create_visualization.png)
 
@@ -77,7 +80,7 @@ you can see in the following image container list which visualizes list of conta
 ## 3. Grafana
 ### 3.1 Install Grafana
 
-To install ```Grafana ``` used grafana docker image
+To install ```Grafana``` used grafana docker image
 
 ```docker run -d --name=grafana -p 3000:3000 grafana/grafana```
 
@@ -100,6 +103,5 @@ here you can see configuration setting in grafana, adding new table panel to das
 
 here is a result
 ![container list kibana](./assets/grafana_table.png)
-
 
 
