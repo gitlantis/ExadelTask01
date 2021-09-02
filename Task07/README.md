@@ -26,7 +26,6 @@ Configuring zabbix agent:
 
 ```sudo nano /etc/zabbix/zabbix_agentd.conf```
 
-------------------
 ```sh
 
 #zabbix server address
