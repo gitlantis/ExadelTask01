@@ -74,7 +74,9 @@ when we select ```Analytics > Discover``` you can see all logs from selected pat
 ![container list kibana](./assets/create_visualization.png)
 
 2. after saving dashboard
+   
 you can see in the following image container list which visualizes list of containesrs currently running:
+
 ![container list kibana](./assets/container_list.png)
 
 ## 3. Grafana
@@ -92,6 +94,7 @@ Integrate ```Grafana``` to ```ELK``` it is important to show ```URL``` of ELK,
 ```pattern name```, ```time field name``` and ```elastcsearch version```
 
 ![container list kibana](./assets/integrate_grafana.png)
+
 I am going to show you similar log on to show dimilar result 
 
 ### 3.3 Set up Dashboards
@@ -99,9 +102,11 @@ I am going to show you similar log on to show dimilar result
 To show on ```Grafana``` similar result on ```Kibana``` I am going to show container list on dashboard
 
 here you can see configuration setting in grafana, adding new table panel to dashboard
+
 ![container list kibana](./assets/grafana_dashboard_c.png)
 
 here is a result
+
 ![container list kibana](./assets/grafana_table.png)
 
 
